@@ -64,12 +64,26 @@ void Unit::newTurn(){
 }
 
 //Write Function Member attack(), beAttacked(), heal(), guard() and isDead() here
-//
-//
-//
-//
-//
-//
+bool Unit::isDead(){
+	if(hp<=0) return true;
+	else return false;
+}
+void Unit::guard(){
+	guard_on = true;
+}
+int Unit::heal(){
+	int h = rand()%21+10;
+
+}
+int Unit::beAttacked(int oppatk){
+	//guard_on = false {dmg = oppatk - def,ลด hp ตาม dmg,return dmg}
+	//guard_on = true {dmg = dmg/3,ลด hp ตาม dmg,return dmg}
+}
+int Unit::attack(Unit &who){
+	//เรียก beAttacked
+	//who.beAttacked(atk from)
+}
+
 
 void drawScene(char p_action,int p,char m_action,int m){
 	cout << "                                                       \n";
