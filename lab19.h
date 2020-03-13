@@ -30,15 +30,15 @@ void Unit::create(string t){
 		type = "Hero";
 		cout << "Please input your name: ";
 		getline(cin,name);
-		hpmax = rand()%20+90;
-		atk = rand()%5+14;
-		def = rand()%3+9;
+		hpmax = rand()%20+90; //90-109
+		atk = rand()%5+200; //14-18
+		def = rand()%3+9; //9-11
 	}else if(t == "Monster"){
 		type = "Monster";
 		name = "Monster";
-		hpmax = rand()%20+200;
-		atk = rand()%5+25;
-		def = rand()%3+5;
+		hpmax = rand()%20+200; //200-219
+		atk = rand()%5+25; //25-29
+		def = rand()%3+5; //5-7
 	}
 	hp = hpmax;
 	guard_on = false;
@@ -72,16 +72,35 @@ void Unit::guard(){
 	guard_on = true;
 }
 int Unit::heal(){
-	int h = rand()%21+10;
-
+	int heal = rand()%21+10;
+	if(heal+hp>hpmax){
+		heal = hpmax - hp;
+		hp = hpmax;
+	}else{
+		hp = hp + heal;
+	}
+	return heal;
 }
 int Unit::beAttacked(int oppatk){
 	//guard_on = false {dmg = oppatk - def,ลด hp ตาม dmg,return dmg}
+	int dmg = 0;
+	if(guard_on == false){
+		dmg = oppatk-def;
+		hp = hp - dmg;
+	}
 	//guard_on = true {dmg = dmg/3,ลด hp ตาม dmg,return dmg}
+	else{
+		dmg = oppatk-def;
+		dmg = dmg/3;
+		hp = hp - dmg;
+	}
+	return dmg;
+
 }
 int Unit::attack(Unit &who){
 	//เรียก beAttacked
 	//who.beAttacked(atk from)
+	who.beAttacked(atk);
 }
 
 
